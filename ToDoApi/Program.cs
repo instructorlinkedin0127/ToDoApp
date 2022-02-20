@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("ToDoApiDbContext");
 
+// Dependency Injection
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSqlite<ToDoApiDbContext>(connectionString);
 builder.Services.AddSwaggerGen(c =>
