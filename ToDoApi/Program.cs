@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Ni_Soft.ToDoApi.Data;
+using Ni_Soft.ToDoApi.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,14 @@ app.MapFallback(() => Results.Redirect("/swagger"));
 app.MapGet("/todos", async (ToDoApiDbContext db) =>
 {
     return await db.Todos.ToListAsync();
+});
+
+app.MapPost("/todos", async (ToDoApiDbContext db, TodoEntity todo) =>
+{
+    await db.Todos.AddAsync(todo);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/todo/{todo.Id}", todo);
 });
 using (var scope = app.Services.CreateScope())
 {
