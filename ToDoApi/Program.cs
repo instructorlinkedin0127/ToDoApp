@@ -24,7 +24,7 @@ if (app.Environment.IsDevelopment())
 
 app.MapFallback(() => Results.Redirect("/swagger"));
 
-// Get Task by Id
+// Find a task by Id
 app.MapGet("/todos/{id}", async (ToDoApiDbContext db, int id) =>
 {
     return await db.Todos.FindAsync(id) switch
@@ -34,7 +34,6 @@ app.MapGet("/todos/{id}", async (ToDoApiDbContext db, int id) =>
     };
 });
 
-// Get Tasks
 app.MapGet("/todos", async (ToDoApiDbContext db) =>
 {
     return await db.Todos.ToListAsync();
