@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Ni_Soft.ToDoApi.Data;
+using Ni_Soft.ToDoApi.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,10 +28,12 @@ app.MapGet("/todos/{id}", async (ToDoApiDbContext db, int id) =>
 {
     return await db.Todos.FindAsync(id) switch
     {
-        Todo todo => Results.Ok(todo),
+        TodoEntity todo => Results.Ok(todo),
         null => Results.NotFound()
     };
 });
+
+
 app.MapGet("/todos", async (ToDoApiDbContext db) =>
 {
     return await db.Todos.ToListAsync();
