@@ -5,9 +5,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("ToDoApiDbContext");
 
-
-
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSqlite<ToDoApiDbContext>(connectionString);
 builder.Services.AddSwaggerGen(c =>
@@ -23,7 +20,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", $"{builder.Environment.ApplicationName} v1"));
 }
-
 
 app.MapFallback(() => Results.Redirect("/swagger"));
 
