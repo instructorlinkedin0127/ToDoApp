@@ -8,8 +8,6 @@ namespace Ni_Soft.ToDoApi.Data.Entities
     {
         [Key]
         public int Id { get; set; }
-        public string Auteur { get; set; }
-        public DateTime DateCreation { get; set; }
         [Required]
         public string? Titre { get; set; }
         public bool Active { get; set; }
