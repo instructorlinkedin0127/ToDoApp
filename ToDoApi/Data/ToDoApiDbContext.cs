@@ -9,9 +9,10 @@ namespace Ni_Soft.ToDoApi.Data
         public ToDoApiDbContext(DbContextOptions options, ILogger<ToDoApiDbContext> logger)
             : base(options) => _logger = logger;
 
+        // Liste des tâches
         public DbSet<TodoEntity> Todos => Set<TodoEntity>();
 
-
+        // Exécuter les commandes de migration
         public void Migrate()
         {
             try
