@@ -11,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSqlite<ToDoApiDbContext>(connectionString);
 builder.Services.AddSwaggerGen(c =>
 {
+    // API Version 1
     c.SwaggerDoc("v1", new() { Title = builder.Environment.ApplicationName, Version = "v1" });
 });
 
