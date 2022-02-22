@@ -1,12 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Ni_Soft.ToDoApi.Data;
+using Ni_Soft.ToDoApi.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("ToDoApiDbContext");
-
-
-
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSqlite<ToDoApiDbContext>(connectionString);
@@ -26,14 +24,16 @@ if (app.Environment.IsDevelopment())
 
 app.MapFallback(() => Results.Redirect("/swagger"));
 
+// Find a task by Id
 app.MapGet("/todos/{id}", async (ToDoApiDbContext db, int id) =>
 {
     return await db.Todos.FindAsync(id) switch
     {
-        Todo todo => Results.Ok(todo),
+        TodoEntity todo => Results.Ok(todo),
         null => Results.NotFound()
     };
 });
+
 app.MapGet("/todos", async (ToDoApiDbContext db) =>
 {
     return await db.Todos.ToListAsync();
