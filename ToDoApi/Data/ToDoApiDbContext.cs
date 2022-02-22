@@ -11,7 +11,9 @@ namespace Ni_Soft.ToDoApi.Data
 
         public DbSet<TodoEntity> Todos => Set<TodoEntity>();
 
-
+        /// <summary>
+        /// Execute Migration
+        /// </summary>
         public void Migrate()
         {
             try
@@ -20,6 +22,7 @@ namespace Ni_Soft.ToDoApi.Data
             }
             catch (Exception ex)
             {
+                _logger.LogTrace("Migration failed", ex);
                 _logger.LogError($"Failed to migrate database", ex);
             }
         }
