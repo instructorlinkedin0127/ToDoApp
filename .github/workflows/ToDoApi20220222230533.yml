@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core app to Windows WebApp ToDoApi20220222230533
+name: build and deploy ToDoApi
 on:
   push:
     branches:
